@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.greenrobot.greendao'
-apply plugin: 'io.fabric'
 apply plugin: "de.timfreiheit.resourceplaceholders"
 
 static def releaseTime() {
@@ -15,7 +14,7 @@ def gitCommits = Integer.parseInt('git rev-list --count HEAD'.execute([], projec
 
 android {
     compileSdkVersion 29
-    buildToolsVersion '28.0.3'
+    buildToolsVersion '29.0.3'
     signingConfigs {
         myConfig {
             storeFile file(RELEASE_STORE_FILE)
@@ -137,8 +136,8 @@ dependencies {
 
     //bind view
     //noinspection AnnotationProcessorOnCompilePath
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.jakewharton:butterknife:10.2.2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.2'
 
     //webServer
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
@@ -173,7 +172,6 @@ greendao {
     targetGenDir 'src/main/java'
 }
 
-apply plugin: 'com.google.gms.google-services'
 
 afterEvaluate {
     for (Task task : project.tasks.matching { it.name.startsWith('crashlyticsUploadDeobs') }) {
