@@ -42,6 +42,9 @@ import com.kunfei.bookshelf.view.adapter.BookSourceAdapter;
 import com.kunfei.bookshelf.widget.filepicker.picker.FilePicker;
 import com.kunfei.bookshelf.widget.modialog.InputDialog;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -292,6 +295,9 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
             case R.id.action_import_book_source_rwm:
                 scanBookSource();
                 break;
+            case R.id.action_import_book_source_default:
+                importBookSourceDefault();
+                break;
             case R.id.action_revert_selection:
                 revertSelection();
                 break;
@@ -421,6 +427,20 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
                         ACache.get(BookSourceActivity.this).put("sourceUrl", TextUtils.join(";", urlList));
                     }
                 }).show();
+    }
+
+    private void importBookSourceDefault() {
+        try {
+            String line;
+            InputStream open = this.getResources().getAssets().open("booksource/DefaultBookSources.txt");
+            InputStreamReader inputStreamReader = new InputStreamReader(open);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            while ((line = bufferedReader.readLine()) != null && line.length() > 0) {
+                mPresenter.importBookSource(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void selectFileSys() {
