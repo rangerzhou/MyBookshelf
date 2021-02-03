@@ -13,7 +13,7 @@ def version = "2." + releaseTime()
 def gitCommits = Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '29.0.3'
     signingConfigs {
         myConfig {
@@ -27,7 +27,7 @@ android {
     defaultConfig {
         applicationId "com.gedoor.monkeybook"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 10000 + gitCommits
         versionName version
         project.ext.set("archivesBaseName", name + "_" + version)
@@ -88,8 +88,8 @@ dependencies {
     implementation "org.jetbrains.anko:anko-sdk27-listeners:$anko_version"
 
     //fireBase
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.1'
 
     //androidX
     implementation 'androidx.multidex:multidex:2.0.1'
