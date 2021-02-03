@@ -66,7 +66,8 @@ public class BookSourceBeanDao extends AbstractDao<BookSourceBean, String> {
         public final static Property RuleContentUrl = new Property(39, String.class, "ruleContentUrl", false, "RULE_CONTENT_URL");
         public final static Property RuleContentUrlNext = new Property(40, String.class, "ruleContentUrlNext", false, "RULE_CONTENT_URL_NEXT");
         public final static Property RuleBookContent = new Property(41, String.class, "ruleBookContent", false, "RULE_BOOK_CONTENT");
-        public final static Property HttpUserAgent = new Property(42, String.class, "httpUserAgent", false, "HTTP_USER_AGENT");
+        public final static Property RuleBookContentReplace = new Property(42, String.class, "ruleBookContentReplace", false, "RULE_BOOK_CONTENT_REPLACE");
+        public final static Property HttpUserAgent = new Property(43, String.class, "httpUserAgent", false, "HTTP_USER_AGENT");
     }
 
 
@@ -124,7 +125,8 @@ public class BookSourceBeanDao extends AbstractDao<BookSourceBean, String> {
                 "\"RULE_CONTENT_URL\" TEXT," + // 39: ruleContentUrl
                 "\"RULE_CONTENT_URL_NEXT\" TEXT," + // 40: ruleContentUrlNext
                 "\"RULE_BOOK_CONTENT\" TEXT," + // 41: ruleBookContent
-                "\"HTTP_USER_AGENT\" TEXT);"); // 42: httpUserAgent
+                "\"RULE_BOOK_CONTENT_REPLACE\" TEXT," + // 42: ruleBookContentReplace
+                "\"HTTP_USER_AGENT\" TEXT);"); // 43: httpUserAgent
     }
 
     /** Drops the underlying database table. */
@@ -335,9 +337,14 @@ public class BookSourceBeanDao extends AbstractDao<BookSourceBean, String> {
             stmt.bindString(42, ruleBookContent);
         }
  
+        String ruleBookContentReplace = entity.getRuleBookContentReplace();
+        if (ruleBookContentReplace != null) {
+            stmt.bindString(43, ruleBookContentReplace);
+        }
+ 
         String httpUserAgent = entity.getHttpUserAgent();
         if (httpUserAgent != null) {
-            stmt.bindString(43, httpUserAgent);
+            stmt.bindString(44, httpUserAgent);
         }
     }
 
@@ -543,9 +550,14 @@ public class BookSourceBeanDao extends AbstractDao<BookSourceBean, String> {
             stmt.bindString(42, ruleBookContent);
         }
  
+        String ruleBookContentReplace = entity.getRuleBookContentReplace();
+        if (ruleBookContentReplace != null) {
+            stmt.bindString(43, ruleBookContentReplace);
+        }
+ 
         String httpUserAgent = entity.getHttpUserAgent();
         if (httpUserAgent != null) {
-            stmt.bindString(43, httpUserAgent);
+            stmt.bindString(44, httpUserAgent);
         }
     }
 
@@ -599,7 +611,8 @@ public class BookSourceBeanDao extends AbstractDao<BookSourceBean, String> {
             cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39), // ruleContentUrl
             cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40), // ruleContentUrlNext
             cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41), // ruleBookContent
-            cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42) // httpUserAgent
+            cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42), // ruleBookContentReplace
+            cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43) // httpUserAgent
         );
         return entity;
     }
@@ -648,7 +661,8 @@ public class BookSourceBeanDao extends AbstractDao<BookSourceBean, String> {
         entity.setRuleContentUrl(cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39));
         entity.setRuleContentUrlNext(cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40));
         entity.setRuleBookContent(cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41));
-        entity.setHttpUserAgent(cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42));
+        entity.setRuleBookContentReplace(cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42));
+        entity.setHttpUserAgent(cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43));
      }
     
     @Override
